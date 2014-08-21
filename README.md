@@ -8,11 +8,13 @@ Companies like Fitbit, Nike, and Jawbone Up are racing to develop the most advan
 The data linked to from the course website represent data collected from the accelerometers from the Samsung Galaxy S
 smartphone.
 
-A full description is available at the site where the data was obtained: 
+A full description is available at the site where the data was obtained:
+==========
 
 http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones 
 
-The data for the project: 
+The data for the project:
+==========
 
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
@@ -40,6 +42,8 @@ The dataset includes the following files:
 - 'test/X_test.txt': Test set.
 - 'test/y_test.txt': Test labels.
 
+R script to create an average of each mean and std variable for each activity and each subject
+==========
 One R script "run_analysis.R" was created that does the following.
 0. Downloads the data if it hasn't been downloaded already.
 1. Merges the training and the test sets to create one data set.
