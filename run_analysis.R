@@ -17,12 +17,15 @@ if( ! file.exists(archive) )
 ## Load Files from Archive
 # measurements - column headers
 features <-read.table(unz(archive, "UCI HAR Dataset/features.txt"), col.names = c("Id", "Measurement"), stringsAsFactors = FALSE)
+colnames <- gsub("\\(\\)", "", features$Measurement, perl = TRUE)
+rm(features)
+
 # activity description
 activities <- read.table(unz(archive, "UCI HAR Dataset/activity_labels.txt"), col.names = c("Id", "Activity"), quote = "", stringsAsFactors = FALSE)
 
 # factors - measurements
-xTest <- read.table(unz(archive, "UCI HAR Dataset/test/X_test.txt"), col.names = features$Measurement)
-xTrain <- read.table(unz(archive, "UCI HAR Dataset/train/X_train.txt"), col.names = features$Measurement)
+xTest <- read.table(unz(archive, "UCI HAR Dataset/test/X_test.txt"), col.names = colnames)
+xTrain <- read.table(unz(archive, "UCI HAR Dataset/train/X_train.txt"), col.names = colnames)
 
 subjectTest <- read.table(unz(archive, "UCI HAR Dataset/test/subject_test.txt"), col.names = "Subject")
 subjectTrain <- read.table(unz(archive, "UCI HAR Dataset/train/subject_train.txt"), col.names = "Subject")
@@ -39,7 +42,7 @@ subjects <-rbind(subjectTrain, subjectTest)
 rm(xTrain, xTest, yTrain, yTest, subjectTrain, subjectTest)
 
 ## Extract only the measurements on the mean and standard deviation for each measurement
-xAvg <- x[, grep("-mean()|-meanFreq()|-std()", features$Measurement, perl = TRUE)]
+xAvg <- x[, grep("-mean|-std", colnames, perl = TRUE)]
 rm(x)
 
 # Use descriptive activity names to name the activities in the data set
@@ -56,5 +59,4 @@ avgDataset <- aggregate(xAvg, by = list(Activity, Subject), FUN = mean)
 colnames(avgDataset)[1] = "Activity"
 colnames(avgDataset)[2] = "Subject"
 
-write.table(avgDataset, file = "MeanDataSet.txt", row.names = FALSE)
-
+write.table(avgDataset, file = "MeanDataSet.txt", quote = FALSE, row.names = FALSE)
