@@ -2,7 +2,7 @@ The MeanDataSet.txt file produced from the data in:
     https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip.
 
 A description of the original data can be found in the README.txt file found in the archive.
-A description of the features measured in the study in features_info.txt.
+A description of the features measured in the study can be found in features_info.txt.
 
 The data in MeanDataSet.txt consists of:
 
